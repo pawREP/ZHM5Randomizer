@@ -1,11 +1,11 @@
 #include "stdafx.h"
+#include <filesystem>
 #include "RandomisationMan.h"
 #include "MemoryUtils.h"
 #include "Offsets.h"
 #include "SSceneInitParameters.h"
 #include "Console.h"
 #include "Config.h"
-#include <filesystem>
 
 std::unique_ptr<Randomizer> RandomisationMan::world_inventory_randomizer = nullptr;
 std::unique_ptr<Randomizer> RandomisationMan::npc_item_randomizer = nullptr;

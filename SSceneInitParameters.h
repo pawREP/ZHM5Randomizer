@@ -1,7 +1,7 @@
 #pragma once
+#include <regex>
 #include "ZString.h"
 #include "TArray.h"
-#include <regex>
 
 //This is a Glacier 2 Engine type, don't touch!
 struct SSceneInitParameters {

@@ -1,8 +1,9 @@
+#include <string>
 #include "stdafx.h"
 #include "SceneLoadObserver.h"
 #include "MemoryUtils.h"
 #include "Offsets.h"
-#include <string>
+
 
 tLoadScene SceneLoadObserver::o_load_scene = nullptr;
 std::vector<tLoadSceneCallback> SceneLoadObserver::load_scene_callbacks;

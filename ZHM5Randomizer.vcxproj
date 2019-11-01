@@ -182,9 +182,7 @@ copy /Y "$(TargetDir)$(ProjectName).dll" "E:\Steam\steamapps\common\HITMAN2\Reta
     <ClInclude Include="Offsets.h" />
     <ClInclude Include="RandomisationMan.h" />
     <ClInclude Include="Repository.h" />
-    <ClInclude Include="RepositoryAccessor.h" />
     <ClInclude Include="RepositoryID.h" />
-    <ClInclude Include="RNG.h" />
     <ClInclude Include="Scenario.h" />
     <ClInclude Include="SceneLoadObserver.h" />
     <ClInclude Include="SSceneInitParameters.h" />
@@ -206,9 +204,7 @@ copy /Y "$(TargetDir)$(ProjectName).dll" "E:\Steam\steamapps\common\HITMAN2\Reta
     <ClCompile Include="Offsets.cpp" />
     <ClCompile Include="RandomisationMan.cpp" />
     <ClCompile Include="Repository.cpp" />
-    <ClCompile Include="RepositoryAccessor.cpp" />
     <ClCompile Include="RepositoryID.cpp" />
-    <ClCompile Include="RNG.cpp" />
     <ClCompile Include="Scenario.cpp" />
     <ClCompile Include="SceneLoadObserver.cpp" />
     <ClCompile Include="SSceneInitParameters.cpp" />

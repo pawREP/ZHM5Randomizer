@@ -30,9 +30,6 @@
     <ClInclude Include="Repository.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RNG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -72,9 +69,6 @@
     <ClInclude Include="Randomizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RepositoryAccessor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Hash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -93,9 +87,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Repository.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RNG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
@@ -126,9 +117,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Randomizer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RepositoryAccessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Hash.cpp">

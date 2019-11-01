@@ -1,17 +1,12 @@
 #pragma once
-#include <vector>
 #include <random>
-#include <string>
-#include <sstream>
-#include <iterator>
-#include "json.hpp"
 #include <unordered_map>
 #include <unordered_set>
+#include "json.hpp"
 #include "Scenario.h"
 #include "Item.h"
 #include "RepositoryID.h"
-#include <set>
-#include <unordered_set>
+
 
 using json = nlohmann::json;
 

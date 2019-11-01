@@ -2,12 +2,12 @@
 #include "stdafx.h"
 #include <type_traits>
 #include <unordered_map>
+#include <queue>
+#include <random>
 #include "Repository.h"
 #include "json.hpp"
 #include "Scenario.h"
-#include <queue>
-#include <random>
-#include <queue>
+
 
 class DefaultItemPool;
 

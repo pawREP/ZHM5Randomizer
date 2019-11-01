@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "Console.h"
 #include <Windows.h>
 #include <sstream>
 #include <iomanip>
 #include <fstream>
+#include "Console.h"
 #include "Config.h"
 
 void Console::spawn()

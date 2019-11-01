@@ -1,11 +1,10 @@
 #include "stdafx.h"
-#include "Scenario.h"
 #include <string>
 #include <vector>
-#include <iterator>
 #include <regex>
 #include <filesystem>
 #include <unordered_map>
+#include "Scenario.h"
 
 const Scenario Scenario::NONE = Scenario(0);
 const Scenario Scenario::LOCATION_PEACOCK_CASUAL = Scenario(1);

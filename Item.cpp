@@ -1,6 +1,7 @@
 #include "stdafx.h"
-#include "Item.h"
 #include <unordered_map>
+#include "Item.h"
+
 
 std::unordered_map<std::string, ICON> icon_map{
 	{"melee", ICON::MELEE},

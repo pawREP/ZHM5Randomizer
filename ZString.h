@@ -1,8 +1,9 @@
 #pragma once
 #include <cinttypes>
+#include <string>
 #include <string_view>
 #include "Hash.h"
-#include <string>
+
 
 //This is a Glacier 2 Engine type, don't touch!
 
