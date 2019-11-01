@@ -1,12 +1,36 @@
 #pragma once
 
-namespace GameOffsets {
-	extern const void* pPushItem;
-	extern const void* pPushWorldInventoryDetour;
-	extern const void* pPushNPCInventoryDetour;
-	extern const void* pPushHeroInventoryDetour;
-	extern const void* pPushStashInventoryDetour;
+//TODO: The naming here is a bit all over the place
+class GameOffsets {
+private:
+	struct Offsets {
+		void* pPushItem;
 
-	extern const void* pZEntityManager; 
-	extern void** pZEntitySceneContext_LoadScene;
-}
+		void* pPushWorldInventoryDetour;
+		void* pPushNPCInventoryDetour;
+		void* pPushHeroInventoryDetour;
+		void* pPushStashInventoryDetour;
+		void** pZEntitySceneContext_LoadScene;
+	} offsets;
+
+	GameOffsets();
+
+	enum class GameVersion {
+		DX11,
+		DX12,
+		UNK
+	};
+
+	GameVersion getVersion() const ;
+
+public:
+
+	static const GameOffsets* instance();
+
+	void* getPushItem()const;
+	void* getPushWorldInventoryDetour()const;
+	void* getPushNPCInventoryDetour()const;
+	void* getPushHeroInventoryDetour()const;
+	void* getPushStashInventoryDetour()const;
+	void** getZEntitySceneContext_LoadScene()const;
+};

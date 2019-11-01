@@ -12,7 +12,7 @@ class SceneLoadObserver
 {
 private:
 	static tLoadScene o_load_scene;
-	static tLoadSceneCallback load_scene_callback;
+	static std::vector<tLoadSceneCallback> load_scene_callbacks;
 
 public:
 	SceneLoadObserver();

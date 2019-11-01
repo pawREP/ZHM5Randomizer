@@ -5,22 +5,21 @@
 #include <string>
 
 tLoadScene SceneLoadObserver::o_load_scene = nullptr;
-tLoadSceneCallback SceneLoadObserver::load_scene_callback = nullptr;
+std::vector<tLoadSceneCallback> SceneLoadObserver::load_scene_callbacks;
 
 SceneLoadObserver::SceneLoadObserver(){
-	//o_load_scene = reinterpret_cast<decltype(o_load_scene)>(GameOffsets::pZEntitySceneContext_LoadScene);
-	MemoryUtils::DetourVFTCall(GameOffsets::pZEntitySceneContext_LoadScene, detour, (void**)&o_load_scene);
+	o_load_scene = *reinterpret_cast<decltype(&o_load_scene)>(GameOffsets::instance()->getZEntitySceneContext_LoadScene());
+	printf("o_load_scene: 0x%I64x\n", (uintptr_t)o_load_scene);
+	MemoryUtils::DetourVFTCall(GameOffsets::instance()->getZEntitySceneContext_LoadScene(), detour, (void**)&o_load_scene);
 }
 
 uint64_t __fastcall SceneLoadObserver::detour(void* this_, SSceneInitParameters* scene_init_params) {
-	//scene_init_params->print(); //DEBUG print
+	for(const auto& callback: load_scene_callbacks)
+		callback(scene_init_params);
 
-	load_scene_callback(scene_init_params);
-
-	auto f = (tLoadScene)0x1401BF350;//TODO: replace this hardcoded offset with address read from VFT.
-	return f(this_, scene_init_params);
+	return o_load_scene(this_, scene_init_params);
 }
 
 void SceneLoadObserver::registerSceneLoadCallback(const tLoadSceneCallback& callback) {
-	load_scene_callback = callback;
+	load_scene_callbacks.push_back(callback);
 }

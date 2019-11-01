@@ -20,15 +20,10 @@ RandomisationMan::RandomisationMan() {
 	hero_inventory_randomizer = std::make_unique<Randomizer>(new HeroInventoryRandomisation);
 	stash_item_randomizer = std::make_unique<Randomizer>(new StashInventoryRandomisation);
 
-	//Console::log("Detour: %04X\n", *(int*)GameOffsets::pPushWorldInventoryDetour);
-	//Console::log("Detour: %04X\n", *(int*)GameOffsets::pPushNPCInventoryDetour);
-	//Console::log("Detour: %04X\n", *(int*)GameOffsets::pPushHeroInventoryDetour);
-	//Console::log("Detour: %04X\n", *(int*)GameOffsets::pPushStashInventoryDetour);
-
-	MemoryUtils::DetourCall((void*)GameOffsets::pPushWorldInventoryDetour, &pushWorldItem<&world_inventory_randomizer>);
-	MemoryUtils::DetourCall((void*)GameOffsets::pPushNPCInventoryDetour, &pushWorldItem<&npc_item_randomizer>);
-	MemoryUtils::DetourCall((void*)GameOffsets::pPushHeroInventoryDetour, &pushWorldItem<&hero_inventory_randomizer>);
-	MemoryUtils::DetourCall((void*)GameOffsets::pPushStashInventoryDetour, &pushWorldItem<&stash_item_randomizer>);
+	MemoryUtils::DetourCall((void*)GameOffsets::instance()->getPushWorldInventoryDetour(), &pushWorldItem<&world_inventory_randomizer>);
+	MemoryUtils::DetourCall((void*)GameOffsets::instance()->getPushNPCInventoryDetour(), &pushWorldItem<&npc_item_randomizer>);
+	MemoryUtils::DetourCall((void*)GameOffsets::instance()->getPushHeroInventoryDetour(), &pushWorldItem<&hero_inventory_randomizer>);
+	MemoryUtils::DetourCall((void*)GameOffsets::instance()->getPushStashInventoryDetour(), &pushWorldItem<&stash_item_randomizer>);
 }
 
 void RandomisationMan::initializeRandomizers(const SSceneInitParameters* sip) {
