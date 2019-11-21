@@ -3,9 +3,9 @@
 
 GameOffsets::GameVersion GameOffsets::getVersion() const {
 	int timestamp = *reinterpret_cast<int*>(0x1400001C0);
-	if (timestamp == 0x5DC03F66)
+	if (timestamp == 0x5DD542FA)
 		return GameVersion::DX12;
-	else if (timestamp == 0x5DC03F3C)
+	else if (timestamp == 0x5DD54263)
 		return GameVersion::DX11;
 	else
 		return GameVersion::UNK;
