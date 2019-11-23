@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include <Windows.h>
 #include "MemoryUtils.h"
 
 void* MemoryUtils::trampoline_memory_base = nullptr;

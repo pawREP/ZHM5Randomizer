@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "RepositoryID.h"
 
 RepositoryID::RepositoryID(const RepositoryID& guid) {

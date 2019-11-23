@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include <unordered_map>
 #include "Item.h"
 

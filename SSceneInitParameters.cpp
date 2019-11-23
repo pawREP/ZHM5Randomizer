@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "SSceneInitParameters.h"
 
 void SSceneInitParameters::print() const {

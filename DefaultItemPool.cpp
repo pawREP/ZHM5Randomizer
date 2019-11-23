@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "DefaultItemPool.h"
 #include "Repository.h"
 #include "json.hpp"

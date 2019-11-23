@@ -1,5 +1,4 @@
 #include <string>
-#include "stdafx.h"
 #include "SceneLoadObserver.h"
 #include "MemoryUtils.h"
 #include "Offsets.h"

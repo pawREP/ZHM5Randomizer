@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include <Windows.h>
 #include <filesystem>
 #include "Config.h"
 

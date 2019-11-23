@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include <Windows.h>
 #include <sstream>
 #include <iomanip>

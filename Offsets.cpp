@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include <Windows.h>
 #include "Offsets.h"
 
 GameOffsets::GameVersion GameOffsets::getVersion() const {

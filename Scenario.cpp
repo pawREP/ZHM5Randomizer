@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include <string>
 #include <vector>
 #include <regex>
