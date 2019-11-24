@@ -2,7 +2,10 @@
 #include "Offsets.h"
 
 GameOffsets::GameVersion GameOffsets::getVersion() const {
-	int timestamp = *reinterpret_cast<int*>(0x1400001C0);
+	void* image_base = (void*)0x140000000;
+	auto dos_header = *reinterpret_cast<IMAGE_DOS_HEADER*>(image_base);
+	auto nt_header = *reinterpret_cast<IMAGE_NT_HEADERS*>((uintptr_t)image_base + dos_header.e_lfanew);
+	int timestamp = nt_header.FileHeader.TimeDateStamp;
 	if (timestamp == 0x5DD542FA)
 		return GameVersion::DX12;
 	else if (timestamp == 0x5DD54263)
