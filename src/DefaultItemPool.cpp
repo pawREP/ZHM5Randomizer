@@ -1,6 +1,6 @@
 #include "DefaultItemPool.h"
 #include "Repository.h"
-#include "json.hpp"
+#include "..\thirdparty\json.hpp"
 #include "Console.h"
 
 DefaultItemPool::DefaultItemPool(json& json) {

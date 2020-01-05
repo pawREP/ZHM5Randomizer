@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <functional>
-#include "json.hpp"
+#include "..\thirdparty\json.hpp"
 #include "RepositoryID.h"
 
 using json = nlohmann::json;

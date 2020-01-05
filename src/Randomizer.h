@@ -4,7 +4,7 @@
 #include <queue>
 #include <random>
 #include "Repository.h"
-#include "json.hpp"
+#include "..\thirdparty\json.hpp"
 #include "Scenario.h"
 
 
