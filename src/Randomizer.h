@@ -15,7 +15,7 @@ protected:
 	RandomDrawRepository& repo;
 	std::mt19937 rng_engine;
 
-	RandomisationStrategy(unsigned long long RNG_seed = 0);
+	RandomisationStrategy(unsigned int RNG_seed = 0);
 
 public:
 	//Takes Repository ID and returns a new ID according to the internal randomisation strategy
