@@ -5,6 +5,7 @@
 #include "RepositoryID.h"
 #include "Repository.h"
 #include "Item.h"
+#include "RNG.h"
 
 using json = nlohmann::json;
 
@@ -61,10 +62,8 @@ bool ItemRepository::contains(const RepositoryID& id) const {
 	return false;
 }
 
-RandomDrawRepository::RandomDrawRepository()
-{
-	std::random_device rd;
-	rng_engine = std::mt19937(rd());
+RandomDrawRepository::RandomDrawRepository() : rng_engine(RNG::inst().getEngine()) {
+	
 }
 
 RandomDrawRepository& RandomDrawRepository::inst() {
@@ -85,7 +84,7 @@ void RandomDrawRepository::getRandom(std::vector<const RepositoryID*>& item_set,
 	auto dist = std::uniform_int_distribution<int>(0, cache[hash]->size() - 1);
 
 	for (int i = 0; i < count; ++i)
-		item_set.push_back(cache[hash]->operator[](dist(rng_engine)));
+		item_set.push_back(cache[hash]->operator[](dist(*rng_engine)));
 }
 
 const RepositoryID* RandomDrawRepository::getRandom(std::function<bool(const Item&)> fn) {
@@ -106,5 +105,5 @@ void RandomDrawRepository::getRandom(std::vector<const RepositoryID*>& item_set,
 	auto dist = std::uniform_int_distribution<int>(0, candidates.size() - 1);
 
 	for (int i = 0; i < count; ++i)
-		item_set.push_back(candidates[dist(rng_engine)]);
+		item_set.push_back(candidates[dist(*rng_engine)]);
 }

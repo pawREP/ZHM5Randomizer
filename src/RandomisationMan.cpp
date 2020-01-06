@@ -5,6 +5,7 @@
 #include "SSceneInitParameters.h"
 #include "Console.h"
 #include "Config.h"
+#include "RNG.h"
 
 std::unique_ptr<Randomizer> RandomisationMan::world_inventory_randomizer = nullptr;
 std::unique_ptr<Randomizer> RandomisationMan::npc_item_randomizer = nullptr;
@@ -46,6 +47,14 @@ void RandomisationMan::initializeRandomizers(const SSceneInitParameters* sip) {
 	sip->print();
 
 	Config::loadConfig();
+
+	{
+		auto seed = Config::RNGSeed;
+		if (seed == 0) {
+			seed = std::random_device{}();
+		}
+		RNG::inst().seed(Config::RNGSeed);
+	}
 
 	auto scenario = Scenario::from_SceneInitParams(*sip);
 

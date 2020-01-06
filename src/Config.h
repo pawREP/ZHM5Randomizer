@@ -14,6 +14,7 @@ namespace Config
 	extern bool showDebugConsole;
 	extern bool enableDebugLogging;
 	extern bool logToFile;
+	extern int RNGSeed;
 
 	void loadConfig();
 };

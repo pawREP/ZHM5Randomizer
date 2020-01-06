@@ -21,6 +21,7 @@ public:
 	ItemRepository();
 
 	//Returns a pointer into the repository entry that matches the input ID.
+	//This function is intended to be used to convert a const reference to a RpoID into and id that can be passed to the game.
 	const RepositoryID* getStablePointer(const RepositoryID&) const;
 	const Item* getItem(const RepositoryID&) const;
 	const std::unordered_set<RepositoryID>& getIds() const;
@@ -31,7 +32,7 @@ public:
 class RandomDrawRepository : public ItemRepository
 {
 private:
-	std::mt19937 rng_engine;
+	std::mt19937* rng_engine;
 
 	//TODO: fix memory
 	std::unordered_map<void*, std::vector<const RepositoryID *>*> cache;

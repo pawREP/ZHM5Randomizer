@@ -13,7 +13,6 @@ class DefaultItemPool;
 class RandomisationStrategy {
 protected:
 	RandomDrawRepository& repo;
-	std::mt19937 rng_engine;
 
 	RandomisationStrategy(unsigned int RNG_seed = 0);
 
