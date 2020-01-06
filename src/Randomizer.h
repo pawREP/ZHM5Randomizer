@@ -14,7 +14,7 @@ class RandomisationStrategy {
 protected:
 	RandomDrawRepository& repo;
 
-	RandomisationStrategy(unsigned int RNG_seed = 0);
+	RandomisationStrategy();
 
 public:
 	//Takes Repository ID and returns a new ID according to the internal randomisation strategy
@@ -23,7 +23,7 @@ public:
 
 	//Called on SceneLoad. This function is intended for stateful randomisation strategies
 	//which might require knowledge of the next scene and/or default item pool of that scene
-	//to setup their internal state in preparation of item randomisation.
+	//to setup their internal state in preparation for item randomisation.
 	virtual void initialize(Scenario, const DefaultItemPool* const ) = 0;
 };
 
