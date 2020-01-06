@@ -6,6 +6,13 @@
 
 using tPushItem = __int64(__fastcall*)(__int64*, const RepositoryID*, __int64, void*, __int64, __int64, __int64*, void*, char*, char);
 
+enum class RandomizerSlot {
+	WorldInventory,
+	NPCInventory,
+	HeroInventory,
+	StashInventory
+};
+
 class RandomisationMan
 {
 private:
@@ -28,6 +35,7 @@ public:
 
 	RandomisationMan();
 
+	void registerRandomizer(RandomizerSlot slot, std::unique_ptr<Randomizer> rng);
 	void initializeRandomizers(const SSceneInitParameters* scen);
 };
 

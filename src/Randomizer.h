@@ -28,6 +28,17 @@ public:
 	virtual void initialize(Scenario, const DefaultItemPool* const ) = 0;
 };
 
+class IdentityRandomisation : public RandomisationStrategy {
+private:
+	std::queue<const RepositoryID*> item_queue;
+
+public:
+	IdentityRandomisation();
+
+	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
+	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override final;
+};
+
 //This randomisation strategy is intended to be used to randomize world items during the initial load of a level.
 //It's desiged to be as undistruptive to the game flow as possible.
 class WorldInventoryRandomisation : public RandomisationStrategy {
@@ -37,8 +48,8 @@ private:
 public:
 	WorldInventoryRandomisation();
 
-	const RepositoryID* randomize(const RepositoryID* in_out_ID) override;
-	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override;
+	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
+	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override final;
 };
 
 class NPCItemRandomisation : public RandomisationStrategy {
@@ -47,8 +58,8 @@ private:
 public:
 	NPCItemRandomisation();
 
-	const RepositoryID* randomize(const RepositoryID* in_out_ID) override;
-	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override;
+	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
+	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override final;
 };
 
 /*
@@ -62,16 +73,16 @@ class HeroInventoryRandomisation : public RandomisationStrategy {
 public:
 	HeroInventoryRandomisation();
 
-	const RepositoryID* randomize(const RepositoryID* in_out_ID) override;
-	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override;
+	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
+	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override final;
 };
 
 class StashInventoryRandomisation : public RandomisationStrategy {
 public:
 	StashInventoryRandomisation();
 
-	const RepositoryID* randomize(const RepositoryID* in_out_ID) override;
-	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override;
+	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
+	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override final;
 };
 
 class Randomizer {

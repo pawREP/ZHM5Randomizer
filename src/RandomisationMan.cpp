@@ -19,10 +19,27 @@ RandomisationMan::RandomisationMan() {
 	hero_inventory_randomizer = std::make_unique<Randomizer>(new HeroInventoryRandomisation);
 	stash_item_randomizer = std::make_unique<Randomizer>(new StashInventoryRandomisation);
 
-	MemoryUtils::DetourCall((void*)GameOffsets::instance()->getPushWorldInventoryDetour(), reinterpret_cast<char*>(&pushWorldItem<&world_inventory_randomizer>));
-	MemoryUtils::DetourCall((void*)GameOffsets::instance()->getPushNPCInventoryDetour(), reinterpret_cast<char*>(&pushWorldItem<&npc_item_randomizer>));
-	MemoryUtils::DetourCall((void*)GameOffsets::instance()->getPushHeroInventoryDetour(), reinterpret_cast<char*>(&pushWorldItem<&hero_inventory_randomizer>));
-	MemoryUtils::DetourCall((void*)GameOffsets::instance()->getPushStashInventoryDetour(), reinterpret_cast<char*>(&pushWorldItem<&stash_item_randomizer>));
+	MemoryUtils::DetourCall(GameOffsets::instance()->getPushWorldInventoryDetour(), reinterpret_cast<const void*>(&pushWorldItem<&world_inventory_randomizer>));
+	MemoryUtils::DetourCall(GameOffsets::instance()->getPushNPCInventoryDetour(), reinterpret_cast<const void*>(&pushWorldItem<&npc_item_randomizer>));
+	MemoryUtils::DetourCall(GameOffsets::instance()->getPushHeroInventoryDetour(), reinterpret_cast<const void*>(&pushWorldItem<&hero_inventory_randomizer>));
+	MemoryUtils::DetourCall(GameOffsets::instance()->getPushStashInventoryDetour(), reinterpret_cast<const void*>(&pushWorldItem<&stash_item_randomizer>));
+}
+
+void RandomisationMan::registerRandomizer(RandomizerSlot slot, std::unique_ptr<Randomizer> rng) {
+	switch (slot) {
+	case RandomizerSlot::WorldInventory:
+		world_inventory_randomizer = std::move(rng);
+		break;
+	case RandomizerSlot::NPCInventory:
+		npc_item_randomizer = std::move(rng);
+		break;
+	case RandomizerSlot::HeroInventory:
+		hero_inventory_randomizer = std::move(rng);
+		break;
+	case RandomizerSlot::StashInventory:
+		stash_item_randomizer = std::move(rng);
+		break;
+	}
 }
 
 void RandomisationMan::initializeRandomizers(const SSceneInitParameters* sip) {
