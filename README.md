@@ -2,7 +2,7 @@
 --------------------
 ZHM5Randomizer is a smart item randomizer for hitman 2 (2018) that allows randomization of world, hero, npc and stash inventories. It's easy to use, customize and extend.
 
-#### How install / use:
+#### How to install / use:
 - Download the latest release here: [Download](https://github.com/pawREP/ZHM5Randomizer/releases/latest "Download")
 - Extract all the files into `..\HITMAN2\Retail` (yes, even if you are using DX12).
 - Optionally, configure the randomizer by modifying `ZHM5Randomizer.ini`.
@@ -29,7 +29,7 @@ public:
 		auto item = repo.getItem(*id);
 		if (item->isQuestItem() || item->isKey())
 			return id;
-		return repo.getRandom(&Item::isWeapon);
+		return repo.getRandom(&Item::isTool);
 	}
 };
 ```
