@@ -12,13 +12,32 @@ std::unique_ptr<Randomizer> RandomisationMan::npc_item_randomizer = nullptr;
 std::unique_ptr<Randomizer> RandomisationMan::hero_inventory_randomizer = nullptr;
 std::unique_ptr<Randomizer> RandomisationMan::stash_item_randomizer = nullptr;
 
+void RandomisationMan::configureRandomizerCollection() {
+	Console::log("configureRandomizerCollection called with : %s\n", Config::randomizationScenario.c_str());
+	if(Config::randomizationScenario == "Default") {
+		registerRandomizer(RandomizerSlot::WorldInventory, std::make_unique<Randomizer>(new WorldInventoryRandomisation));
+		registerRandomizer(RandomizerSlot::NPCInventory, std::make_unique<Randomizer>(new NPCItemRandomisation));
+		registerRandomizer(RandomizerSlot::HeroInventory, std::make_unique<Randomizer>(new HeroInventoryRandomisation));
+		registerRandomizer(RandomizerSlot::StashInventory, std::make_unique<Randomizer>(new StashInventoryRandomisation));
+		return;
+	}
+
+	if(Config::randomizationScenario == "Hard"){
+		registerRandomizer(RandomizerSlot::WorldInventory, std::make_unique<Randomizer>(new WorldInventoryRandomisation));
+		registerRandomizer(RandomizerSlot::NPCInventory, std::make_unique<Randomizer>(new UnrestrictedNPCRandomization));
+		registerRandomizer(RandomizerSlot::HeroInventory, std::make_unique<Randomizer>(new HeroInventoryRandomisation));
+		registerRandomizer(RandomizerSlot::StashInventory, std::make_unique<Randomizer>(new StashInventoryRandomisation));
+		return;
+	}
+}
+
 RandomisationMan::RandomisationMan() {
 	default_item_pool_repo = std::make_unique<DefaultItemPoolRepository>("..\\HITMAN2\\Retail\\DefaultItemPools.json");
 
-	world_inventory_randomizer = std::make_unique<Randomizer>(new WorldInventoryRandomisation);
-	npc_item_randomizer = std::make_unique<Randomizer>(new NPCItemRandomisation);
-	hero_inventory_randomizer = std::make_unique<Randomizer>(new HeroInventoryRandomisation);
-	stash_item_randomizer = std::make_unique<Randomizer>(new StashInventoryRandomisation);
+	world_inventory_randomizer = std::make_unique<Randomizer>(new IdentityRandomisation);
+	npc_item_randomizer = std::make_unique<Randomizer>(new IdentityRandomisation);
+	hero_inventory_randomizer = std::make_unique<Randomizer>(new IdentityRandomisation);
+	stash_item_randomizer = std::make_unique<Randomizer>(new IdentityRandomisation);
 
 	MemoryUtils::DetourCall(GameOffsets::instance()->getPushWorldInventoryDetour(), reinterpret_cast<const void*>(&pushWorldItem<&world_inventory_randomizer>));
 	MemoryUtils::DetourCall(GameOffsets::instance()->getPushNPCInventoryDetour(), reinterpret_cast<const void*>(&pushWorldItem<&npc_item_randomizer>));
@@ -46,18 +65,14 @@ void RandomisationMan::registerRandomizer(RandomizerSlot slot, std::unique_ptr<R
 void RandomisationMan::initializeRandomizers(const SSceneInitParameters* sip) {
 	sip->print();
 
-	Config::loadConfig();
+	configureRandomizerCollection();
 
-	{
-		auto seed = Config::RNGSeed;
-		if (seed == 0) {
-			seed = std::random_device{}();
-		}
-		RNG::inst().seed(Config::RNGSeed);
-	}
+	auto seed = Config::RNGSeed;
+	if (seed == 0)
+		seed = std::random_device{}();
+	RNG::inst().seed(Config::RNGSeed);
 
 	auto scenario = Scenario::from_SceneInitParams(*sip);
-
 	Console::log("Loading Scenario: %s\n", scenario.string().c_str());
 
 	auto default_pool = default_item_pool_repo->getDefaultPool(scenario);

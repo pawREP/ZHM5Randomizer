@@ -15,6 +15,7 @@ namespace Config
 	extern bool enableDebugLogging;
 	extern bool logToFile;
 	extern int RNGSeed;
+	extern std::string randomizationScenario;
 
 	void loadConfig();
 };

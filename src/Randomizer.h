@@ -24,7 +24,7 @@ public:
 	//Called on SceneLoad. This function is intended for stateful randomisation strategies
 	//which might require knowledge of the next scene and/or default item pool of that scene
 	//to setup their internal state in preparation for item randomisation.
-	virtual void initialize(Scenario, const DefaultItemPool* const ) = 0;
+	virtual void initialize(Scenario, const DefaultItemPool* const );
 };
 
 class IdentityRandomisation : public RandomisationStrategy {
@@ -32,10 +32,8 @@ private:
 	std::queue<const RepositoryID*> item_queue;
 
 public:
-	IdentityRandomisation();
 
 	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
-	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override final;
 };
 
 //This randomisation strategy is intended to be used to randomize world items during the initial load of a level.
@@ -45,20 +43,13 @@ private:
 	std::queue<const RepositoryID*> item_queue;
 
 public:
-	WorldInventoryRandomisation();
-
 	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
 	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override final;
 };
 
 class NPCItemRandomisation : public RandomisationStrategy {
-private:
-
 public:
-	NPCItemRandomisation();
-
 	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
-	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override final;
 };
 
 /*
@@ -70,18 +61,18 @@ suitcase, pistol, distraction, poison, Container and smg.
 */
 class HeroInventoryRandomisation : public RandomisationStrategy {
 public:
-	HeroInventoryRandomisation();
-
 	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
-	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override final;
 };
 
 class StashInventoryRandomisation : public RandomisationStrategy {
 public:
-	StashInventoryRandomisation();
-
 	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
-	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override final;
+};
+
+//Randomizes all NPC weapons without type restrictions and replaces flash grenades with frag grenades.
+class UnrestrictedNPCRandomization : public RandomisationStrategy {
+public:
+	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
 };
 
 class Randomizer {

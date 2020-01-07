@@ -31,6 +31,8 @@ private:
 		return reinterpret_cast<tPushItem>(GameOffsets::instance()->getPushItem())(worldInventory, id, a3, a4, a5, a6, a7, a8, a9, a10);
 	};
 
+	void configureRandomizerCollection();
+
 public:
 
 	RandomisationMan();

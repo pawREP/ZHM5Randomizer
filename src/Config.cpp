@@ -13,6 +13,7 @@ bool Config::showDebugConsole;
 bool Config::enableDebugLogging;
 bool Config::logToFile;
 int Config::RNGSeed;
+std::string Config::randomizationScenario;
 
 #define LOAD_INI_ENTRY(name, cat, default_) name = GetPrivateProfileIntA(cat, #name, default_, ini_path.c_str());
 
@@ -30,4 +31,8 @@ void Config::loadConfig() {
 	LOAD_INI_ENTRY(enableDebugLogging,		"Debug", 0);
 	LOAD_INI_ENTRY(logToFile,				"Debug", 0);
 
+	const auto bufSize = 32;
+	char strBuf[bufSize];
+	GetPrivateProfileString("ZHM5Randomizer", "randomizationScenario", "", strBuf, bufSize, ini_path.c_str());
+	randomizationScenario = std::string(strBuf);
 }
