@@ -28,9 +28,6 @@ public:
 };
 
 class IdentityRandomisation : public RandomisationStrategy {
-private:
-	std::queue<const RepositoryID*> item_queue;
-
 public:
 
 	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
