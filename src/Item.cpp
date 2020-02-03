@@ -43,6 +43,21 @@ std::unordered_map<std::string, CHEAT_GROUP> cheat_group_map{
 	{ "eCGSMGs", CHEAT_GROUP::SMGS }
 };
 
+std::unordered_map<std::string, THROW_TYPE> throw_type_map{
+        { "THROW_NONE", THROW_TYPE::NONE},
+        { "THROW_PACIFY_LIGHT", THROW_TYPE::PACIFY_LIGHT},
+        { "THROW_PACIFY_HEAVY", THROW_TYPE::PACIFY_HEAVY},
+        { "THROW_DEADLY_LIGHT", THROW_TYPE::DEADLY_LIGHT},
+        { "THROW_DEADLY_HEAVY", THROW_TYPE::DEADLY_HEAVY},
+};
+
+std::unordered_map<std::string, SILENCE_RATING> SILENCE_RATING_map{
+        { "NONE", SILENCE_RATING::NONE},
+        { "eSR_NotSilenced", SILENCE_RATING::NOT_SILENCED},
+        { "eSR_Silenced", SILENCE_RATING::SILENCED},
+        { "eSR_SuperSilenced", SILENCE_RATING::SUPER_SILENCED},
+};
+
 Item::Item() {
 
 }
@@ -55,6 +70,8 @@ Item::Item(const json& config) {
 		icon = icon_map[config["InventoryCategoryIcon"].get<std::string>()];
 		cheat_group = cheat_group_map[config["CheatGroup"].get<std::string>()];
 		common_name = config["CommonName"].get<std::string>();
+		throw_type = throw_type_map[config["ThrowType"].get<std::string>()];
+		silence_rating = SILENCE_RATING_map[config.value("SilenceRating", "NONE")];
 	}
 	catch (...) {
 		//There doesn't seem to be a convinient way to tell if a key exists in the json object.
@@ -135,6 +152,13 @@ const ICON& Item::getType() const {
 	return icon;
 }
 
+const THROW_TYPE& Item::getThrowType() const {
+    return throw_type;
+}
+
+const SILENCE_RATING& Item::getSilenceRating() const {
+    return silence_rating;
+}
 
 void Item::print() const {
 	//inefficient but it's only for debug printing so shouldn't matter
