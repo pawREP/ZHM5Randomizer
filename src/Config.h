@@ -6,10 +6,10 @@ namespace Config
 {
 	extern std::string base_directory;
 
-	extern bool randomizeWorldInventory;
-	extern bool randomizeHeroInventory;
-	extern bool randomizeNPCInventory;
-	extern bool randomizeStashInventory;
+	extern std::string worldInventoryRandomizer;
+	extern std::string heroInventoryRandomizer;
+	extern std::string npcInventoryRandomizer;
+	extern std::string stashInventoryRandomizer;
 	extern bool randomizeNPCGrenades;
 	extern bool showDebugConsole;
 	extern bool enableDebugLogging;
