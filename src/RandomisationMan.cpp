@@ -83,7 +83,7 @@ void RandomisationMan::initializeRandomizers(const SSceneInitParameters* sip) {
 	auto seed = Config::RNGSeed;
 	if (seed == 0)
 		seed = std::random_device{}();
-	RNG::inst().seed(Config::RNGSeed);
+	RNG::inst().seed(seed);
 
 	auto scenario = Scenario::from_SceneInitParams(*sip);
 	Console::log("Loading Scenario: %s\n", scenario.string().c_str());
