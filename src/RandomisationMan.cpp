@@ -12,23 +12,36 @@ std::unique_ptr<Randomizer> RandomisationMan::npc_item_randomizer = nullptr;
 std::unique_ptr<Randomizer> RandomisationMan::hero_inventory_randomizer = nullptr;
 std::unique_ptr<Randomizer> RandomisationMan::stash_item_randomizer = nullptr;
 
-void RandomisationMan::configureRandomizerCollection() {
-	Console::log("configureRandomizerCollection called with : %s\n", Config::randomizationScenario.c_str());
-	if(Config::randomizationScenario == "Default") {
-		registerRandomizer(RandomizerSlot::WorldInventory, std::make_unique<Randomizer>(new WorldInventoryRandomisation));
-		registerRandomizer(RandomizerSlot::NPCInventory, std::make_unique<Randomizer>(new NPCItemRandomisation));
-		registerRandomizer(RandomizerSlot::HeroInventory, std::make_unique<Randomizer>(new HeroInventoryRandomisation));
-		registerRandomizer(RandomizerSlot::StashInventory, std::make_unique<Randomizer>(new StashInventoryRandomisation));
-		return;
-	}
+template<typename T> RandomisationStrategy* createInstance() { return new T; }
 
-	if(Config::randomizationScenario == "Hard"){
-		registerRandomizer(RandomizerSlot::WorldInventory, std::make_unique<Randomizer>(new WorldInventoryRandomisation));
-		registerRandomizer(RandomizerSlot::NPCInventory, std::make_unique<Randomizer>(new UnrestrictedNPCRandomization));
-		registerRandomizer(RandomizerSlot::HeroInventory, std::make_unique<Randomizer>(new HeroInventoryRandomisation));
-		registerRandomizer(RandomizerSlot::StashInventory, std::make_unique<Randomizer>(new StashInventoryRandomisation));
-		return;
-	}
+std::unordered_map<std::string, RandomisationStrategy*(*)()> worldRandomizers{
+        {"NONE", &createInstance<IdentityRandomisation>},
+        {"DEFAULT", &createInstance<WorldInventoryRandomisation>},
+        {"OOPS_ALL_EXPLOSIVES", &createInstance<OopsAllExplosivesWorldInventoryRandomization>},
+};
+
+std::unordered_map<std::string, RandomisationStrategy*(*)()> npcRandomizers{
+        {"NONE", &createInstance<IdentityRandomisation>},
+        {"DEFAULT", &createInstance<NPCItemRandomisation>},
+        {"HARD", &createInstance<UnrestrictedNPCRandomization>},
+        {"SLEEPY", &createInstance<SleepyNPCRandomization>},
+};
+
+std::unordered_map<std::string, RandomisationStrategy*(*)()> heroRandomizers{
+        {"NONE", &createInstance<IdentityRandomisation>},
+        {"DEFAULT", &createInstance<HeroInventoryRandomisation>},
+};
+
+std::unordered_map<std::string, RandomisationStrategy*(*)()> stashRandomizers{
+        {"NONE", &createInstance<IdentityRandomisation>},
+        {"DEFAULT", &createInstance<StashInventoryRandomisation>},
+};
+
+void RandomisationMan::configureRandomizerCollection() {
+    registerRandomizer(RandomizerSlot::WorldInventory, std::make_unique<Randomizer>(worldRandomizers[Config::worldInventoryRandomizer]()));
+    registerRandomizer(RandomizerSlot::NPCInventory, std::make_unique<Randomizer>(npcRandomizers[Config::npcInventoryRandomizer]()));
+    registerRandomizer(RandomizerSlot::HeroInventory, std::make_unique<Randomizer>(heroRandomizers[Config::heroInventoryRandomizer]()));
+    registerRandomizer(RandomizerSlot::StashInventory, std::make_unique<Randomizer>(stashRandomizers[Config::stashInventoryRandomizer]()));
 }
 
 RandomisationMan::RandomisationMan() {

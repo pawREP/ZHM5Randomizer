@@ -36,9 +36,15 @@ public:
 //This randomisation strategy is intended to be used to randomize world items during the initial load of a level.
 //It's desiged to be as undistruptive to the game flow as possible.
 class WorldInventoryRandomisation : public RandomisationStrategy {
-private:
+protected:
 	std::queue<const RepositoryID*> item_queue;
 
+public:
+	const RepositoryID* randomize(const RepositoryID* in_out_ID) override;
+	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override;
+};
+
+class OopsAllExplosivesWorldInventoryRandomization : public WorldInventoryRandomisation {
 public:
 	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
 	void initialize(Scenario scen, const DefaultItemPool* const default_pool) override final;
@@ -68,6 +74,11 @@ public:
 
 //Randomizes all NPC weapons without type restrictions and replaces flash grenades with frag grenades.
 class UnrestrictedNPCRandomization : public RandomisationStrategy {
+public:
+	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
+};
+
+class SleepyNPCRandomization : public RandomisationStrategy {
 public:
 	const RepositoryID* randomize(const RepositoryID* in_out_ID) override final;
 };
