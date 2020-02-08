@@ -35,9 +35,26 @@ enum class CHEAT_GROUP {
 	SMGS,
 };
 
+enum class THROW_TYPE {
+    NONE,
+    PACIFY_LIGHT,
+    PACIFY_HEAVY,
+    DEADLY_LIGHT,
+    DEADLY_HEAVY,
+};
+
+enum class SILENCE_RATING {
+    NONE,
+    NOT_SILENCED,
+    SILENCED,
+    SUPER_SILENCED,
+};
+
 class Item {
 	ICON icon;
 	CHEAT_GROUP cheat_group;
+	THROW_TYPE throw_type;
+	SILENCE_RATING silence_rating;
 
 	std::string common_name;
 
@@ -64,6 +81,8 @@ public:
 
 	const std::string& string() const;
 	const ICON& getType() const;
+	const THROW_TYPE& getThrowType() const;
+	const SILENCE_RATING& getSilenceRating() const;
 
 	void print() const;
 };
