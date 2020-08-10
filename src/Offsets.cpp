@@ -6,16 +6,16 @@ GameOffsets::GameVersion GameOffsets::getVersion() const {
 	auto dos_header = *reinterpret_cast<IMAGE_DOS_HEADER*>(image_base);
 	auto nt_header = *reinterpret_cast<IMAGE_NT_HEADERS*>((uintptr_t)image_base + dos_header.e_lfanew);
 	int timestamp = nt_header.FileHeader.TimeDateStamp;
-	if (timestamp == 0x5DD542FA)
+	if (timestamp == 0x5EE9D095)
 		return GameVersion::DX12;
-	else if (timestamp == 0x5DD54263)
+	else if (timestamp == 0x5EE9D065)
 		return GameVersion::DX11;
 	else
 		return GameVersion::UNK;
 }
 
 //Check IDA databases for notes about how to update offsets. 
-//Current version: 2.72.0
+//Current version: 2.72.0 Update 3
 GameOffsets::GameOffsets() {
 	switch (getVersion()) {
 	case GameVersion::DX12:
