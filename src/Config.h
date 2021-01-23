@@ -2,21 +2,21 @@
 #include <memory>
 #include <string>
 
-namespace Config
-{
-	extern std::string base_directory;
+namespace Config {
 
-	extern std::string worldInventoryRandomizer;
-	extern std::string heroInventoryRandomizer;
-	extern std::string npcInventoryRandomizer;
-	extern std::string stashInventoryRandomizer;
-	extern bool randomizeNPCGrenades;
-	extern bool showDebugConsole;
-	extern bool enableDebugLogging;
-	extern bool logToFile;
-	extern int RNGSeed;
-	extern std::string randomizationScenario;
+extern std::string base_directory;
+extern std::string retail_directory;
 
-	void loadConfig();
-};
+extern std::string worldInventoryRandomizer;
+extern std::string heroInventoryRandomizer;
+extern std::string npcInventoryRandomizer;
+extern std::string stashInventoryRandomizer;
+extern bool randomizeNPCGrenades;
+extern bool showDebugConsole;
+extern bool enableDebugLogging;
+extern bool logToFile;
+extern int RNGSeed;
+extern std::string randomizationScenario;
 
+void loadConfig();
+}; // namespace Config
