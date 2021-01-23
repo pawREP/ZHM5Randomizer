@@ -48,6 +48,28 @@ public:
 	static const Scenario LOCATION_STINGRAY_CASUAL;
 	static const Scenario LOCATION_STINGRAY_PROFESSIONAL;
 	static const Scenario LOCATION_STINGRAY_MASTER;
+	static const Scenario LOCATION_POLARBEAR_MODULE_002;
+	static const Scenario LOCATION_POLARBEAR_MODULE_002_B;
+	static const Scenario LOCATION_POLARBEAR_MODULE_005;
+	static const Scenario LOCATION_COPPERHEAD;
+	static const Scenario LOCATION_MAMBA;
+	static const Scenario LOCATION_EBOLA;
+	static const Scenario LOCATION_PYTHON;
+	static const Scenario LOCATION_ZIKA;
+	static const Scenario LOCATION_RABIES;
+	static const Scenario LOCATION_FLU;
+	static const Scenario LOCATION_COTTONMOUTH_CASUAL;
+	static const Scenario LOCATION_COTTONMOUTH_PROFESSIONAL;
+	static const Scenario LOCATION_COTTONMOUTH_MASTER;
+	static const Scenario LOCATION_ANACONDA_CASUAL;
+	static const Scenario LOCATION_ANACONDA_PROFESSIONAL;
+	static const Scenario LOCATION_ANACONDA_MASTER;
+	static const Scenario LOCATION_KINGCOBRA_CASUAL;
+	static const Scenario LOCATION_KINGCOBRA_PROFESSIONAL;
+	static const Scenario LOCATION_KINGCOBRA_MASTER;
+	static const Scenario LOCATION_GARTERSNAKE_CASUAL;
+	static const Scenario LOCATION_GARTERSNAKE_PROFESSIONAL;
+	static const Scenario LOCATION_GARTERSNAKE_MASTER;
 
 private:
 	int index;
