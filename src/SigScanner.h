@@ -11,7 +11,7 @@ public:
     SigScanner(HMODULE mod = GetModuleHandle(NULL), int sectionFilter = 0);
 
     // Find first occurance of byte pattern. Returns absolute, virtual address.
-    uintptr_t find(const std::vector<short>& pattern) const;
+    intptr_t find(const std::vector<short>& pattern) const;
 
 private:
     struct MemRange {

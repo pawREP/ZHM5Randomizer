@@ -4,9 +4,16 @@
 #include <Windows.h>
 #include <filesystem>
 
+[[noreturn]] void offsetSearchFailed() {
+    MessageBoxA(NULL, "Signature scanning failed. The current game version might not be supported.", "", NULL);
+    ExitProcess(0);
+}
+
 void* getOffsetByName(const std::string& name) {
     SigScanner scanner;
     auto off = scanner.find(Signatures::locators[name].signature) + Signatures::locators[name].offset;
+    if(off < 0)
+        offsetSearchFailed();
     return reinterpret_cast<void*>(off);
 }
 
@@ -45,6 +52,8 @@ GameOffsets::GameOffsets() {
             pattern[i] = reinterpret_cast<char*>(&ZEntitySceneContext_LoadScene)[i];
         SigScanner scanner;
         offsets.pZEntitySceneContext_LoadScene = reinterpret_cast<void**>(scanner.find(pattern));
+        if(offsets.pZEntitySceneContext_LoadScene < 0)
+            offsetSearchFailed();
         break;
     }
     default:

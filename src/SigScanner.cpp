@@ -20,15 +20,16 @@ SigScanner::SigScanner(HMODULE mod, int sectionFilter) {
     }
 }
 
-uintptr_t SigScanner::find(const std::vector<short>& pattern) const {
+intptr_t SigScanner::find(const std::vector<short>& pattern) const {
     // TODO: Might be worth to check the full domain in debug mode and warn if a pattern isn't unique.
     for(const auto& segment : domain) {
         unsigned char* begin = reinterpret_cast<unsigned char*>(segment.virtualAddr);
         const unsigned char* end = begin + segment.size - pattern.size() + 1;
         for(; begin < end; begin++) {
             if(matchPattern(begin, pattern)) {
-                return reinterpret_cast<uintptr_t>(begin);
+                return reinterpret_cast<intptr_t>(begin);
             }
         }
     }
+    return -1;
 }
