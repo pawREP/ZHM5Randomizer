@@ -7,7 +7,8 @@ GameVersion getVersion() {
     TCHAR szExeFileName[MAX_PATH];
     GetModuleFileName(NULL, szExeFileName, MAX_PATH);
     std::filesystem::path path(szExeFileName);
-    if(path.filename() == "HITMAN3.exe")
+    //Filename might be upper or lower case depending on how the game is launched
+    if(path.filename() == "HITMAN3.exe" || path.filename() == "hitman3.exe")
         return GameVersion::H3DX12;
 
     // Hitman 2
