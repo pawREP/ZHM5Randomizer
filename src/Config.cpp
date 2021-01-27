@@ -26,6 +26,11 @@ constexpr const char* iniMainCategory = "ZHM5Randomizer";
     Config::##name = std::string(strbuf_##name)
 
 void Config::loadConfig() {
+    TCHAR szExeFileName[MAX_PATH];
+    GetModuleFileName(NULL, szExeFileName, MAX_PATH);
+    std::filesystem::path path(szExeFileName);
+    Config::base_directory = path.parent_path().parent_path().generic_string(); //..\\HITMAN3
+
     auto ini_path = Config::base_directory + "\\Retail\\ZHM5Randomizer.ini";
 
     LOAD_INI_STRING_ENTRY(worldInventoryRandomizer, iniMainCategory, "DEFAULT");

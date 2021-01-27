@@ -5,8 +5,6 @@
 namespace Config {
 
 extern std::string base_directory;
-extern std::string retail_directory;
-
 extern std::string worldInventoryRandomizer;
 extern std::string heroInventoryRandomizer;
 extern std::string npcInventoryRandomizer;
