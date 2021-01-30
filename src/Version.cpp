@@ -11,6 +11,8 @@ GameVersion getVersion() {
     if(path.filename() == "HITMAN3.exe" || path.filename() == "hitman3.exe")
         return GameVersion::H3DX12;
 
+    return GameVersion::UNK;
+    // Dead Hitman 2 code below, Hitman 2 is not supported anymore
     // Hitman 2
     void* image_base = GetModuleHandle(NULL);
     auto dos_header = reinterpret_cast<IMAGE_DOS_HEADER*>(image_base);
