@@ -6,10 +6,9 @@ All main missions from Hitman 1, 2 and 3 as well as all side missions are suppor
 
 #### How to install / use:
 - Download the latest release here: [Download](https://github.com/pawREP/ZHM5Randomizer/releases/latest "Download")
-- Extract all the files into `..\HITMAN2\Retail` (yes, even if you are using DX12).
+- Extract all the files into `..\Program Files\Epic Games\HITMAN3\Retail`.
 - Optionally, configure the randomizer by modifying `ZHM5Randomizer.ini`.
-- Start the game through Steam, start a new mission and enjoy.
-
+- Launch the game, start a new mission and enjoy.
 
 #### Limitations / Bugs / Troubleshooting 
 - Loading save files is not supported.
