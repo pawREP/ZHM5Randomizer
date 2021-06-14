@@ -10,12 +10,6 @@ All main missions from Hitman 1, 2 and 3 as well as all side missions are suppor
 - Optionally, configure the randomizer by modifying `ZHM5Randomizer.ini`.
 - Start the game through Steam, start a new mission and enjoy.
 
-#### Linux (Valve Proton) Install (Hitman 2)
-- Launch HITMAN2 at least once with Valve Proton
-- Download and unpack as detailed above
-- Run winecfg with the prefix of the proton environment `WINEPREFIX=/home/$(whoami)/.steam/steam/steamapps/compatdata/863550/pfx winecfg`
-- Go to "Libraries" and add a new overwrite for "dinput8", order should be "Native then Builtin"
-- Save and enjoy
 
 #### Limitations / Bugs / Troubleshooting 
 - Loading save files is not supported.
