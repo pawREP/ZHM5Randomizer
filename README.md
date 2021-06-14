@@ -1,6 +1,6 @@
 ## ZHM5Randomizer
 --------------------
-ZHM5Randomizer is a smart item randomizer for hitman 3 (2021) that allows randomization of world, hero, npc and stash inventories. It's easy to use, customize and extend.
+ZHM5Randomizer is a smart item randomizer for Hitman 3 (2021) that allows randomization of world, hero, npc and stash inventories. It's easy to use, customize and extend.
 
 All main missions from Hitman 1, 2 and 3 as well as all side missions are supported. Escalations are currently not randomized. 
 
