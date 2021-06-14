@@ -65,13 +65,13 @@ RandomisationMan::RandomisationMan() {
     stash_item_randomizer = std::make_unique<Randomizer>(new IdentityRandomisation);
 
     MemoryUtils::DetourCall(GameOffsets::instance()->getPushWorldInventoryDetour(),
-                            reinterpret_cast<const void*>(&pushWorldItem<&world_inventory_randomizer>));
+                            reinterpret_cast<const void*>(&pushItem1Detour<&world_inventory_randomizer>));
     MemoryUtils::DetourCall(GameOffsets::instance()->getPushNPCInventoryDetour(),
-                            reinterpret_cast<const void*>(&pushWorldItem<&npc_item_randomizer>));
+                            reinterpret_cast<const void*>(&pushItem1Detour<&npc_item_randomizer>));
     MemoryUtils::DetourCall(GameOffsets::instance()->getPushHeroInventoryDetour(),
-                            reinterpret_cast<const void*>(&pushWorldItem<&hero_inventory_randomizer>));
+                            reinterpret_cast<const void*>(&pushItem0Detour<&hero_inventory_randomizer>));
     MemoryUtils::DetourCall(GameOffsets::instance()->getPushStashInventoryDetour(),
-                            reinterpret_cast<const void*>(&pushWorldItem<&stash_item_randomizer>));
+                            reinterpret_cast<const void*>(&pushItem0Detour<&stash_item_randomizer>));
 }
 
 void RandomisationMan::registerRandomizer(RandomizerSlot slot, std::unique_ptr<Randomizer> rng) {
@@ -106,7 +106,7 @@ void RandomisationMan::initializeRandomizers(const SSceneInitParameters* sip) {
 #ifdef DEFAULTPOOLEXPORT
     DefaultPoolExport::loadScenario(scenario);
 #endif
-    // Console::log("Loading Scenario: %s\n", scenario.string().c_str());
+    Console::log("Loading Scenario: %I64X\n", scenario);
 
     auto default_pool = default_item_pool_repo->getDefaultPool(scenario);
 

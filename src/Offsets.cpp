@@ -20,23 +20,22 @@ void* getOffsetByName(const std::string& name) {
 GameOffsets::GameOffsets() {
     switch(getVersion()) {
     case GameVersion::H3DX12: {
-        offsets.pPushItem = getOffsetByName("PushItem");
-        offsets.pPushNPCInventoryDetour = getOffsetByName("PushNPCInventoryDetour");
-        offsets.pPushWorldInventoryDetour = getOffsetByName("PushWorldInventoryDetour");
-        offsets.pPushHeroInventoryDetour = getOffsetByName("PushHeroInventoryDetour");
-        offsets.pPushStashInventoryDetour = getOffsetByName("PushStashInventoryDetour");
 
-        // Scan for ZEntitySceneContext_LoadScene function and then for it's vtable entry.
-        auto ZEntitySceneContext_LoadScene = getOffsetByName("ZEntitySceneContext_LoadScene");
-        std::vector<int16_t> pattern(sizeof(void*));
-        for(int i = 0; i < sizeof(void*); ++i)
-            pattern[i] = reinterpret_cast<char*>(&ZEntitySceneContext_LoadScene)[i];
-        SigScanner scanner;
-        offsets.pZEntitySceneContext_LoadScene = reinterpret_cast<void**>(scanner.find(pattern));
-        if(offsets.pZEntitySceneContext_LoadScene < 0)
-            offsetSearchFailed();
-        break;
-    }
+        // TODO: Reintroduce signature scanning here. It was previously removed because of major signature changed introduced with Hitman update 3.30.
+        // (Inlining, NPC/WorldItem spawn merge). If the new layout turns out to be stable, sig scanning should be reintroduced.
+
+        // Hitman 3 3.30 offsets
+        offsets.pPushItem0 = reinterpret_cast<void*>(0x140D6DBA0);
+        offsets.pPushItem1 = reinterpret_cast<void*>(0x140D6E190);
+        offsets.pPushNPCInventoryDetour = reinterpret_cast<void*>(0x14015FD81);
+        offsets.pPushWorldInventoryDetour = reinterpret_cast<void*>(0x140D681CA);
+        offsets.pPushHeroInventoryDetour = reinterpret_cast<void*>(0x14064B253);
+        offsets.pPushStashInventoryDetour = reinterpret_cast<void*>(0x1403D7174);
+        offsets.pZEntitySceneContext_LoadScene = reinterpret_cast<void**>(0x141D05B38);
+    } break;
+    case GameVersion::H2DX12:
+    case GameVersion::H2DX11:
+        // TODO: H2 Specific error message
     default:
         MessageBoxA(NULL, "Randomizer doesn't support current game version", "", NULL);
         ExitProcess(0);
@@ -48,8 +47,11 @@ const GameOffsets* GameOffsets::instance() {
     return &instance;
 }
 
-void* GameOffsets::getPushItem() const {
-    return offsets.pPushItem;
+void* GameOffsets::getPushItem0() const {
+    return offsets.pPushItem0;
+}
+void* GameOffsets::getPushItem1() const {
+    return offsets.pPushItem1;
 }
 void* GameOffsets::getPushWorldInventoryDetour() const {
     return offsets.pPushWorldInventoryDetour;

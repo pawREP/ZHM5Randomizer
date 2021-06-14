@@ -5,7 +5,8 @@
 class GameOffsets {
 private:
     struct Offsets {
-        void* pPushItem;
+        void* pPushItem0;
+        void* pPushItem1;
         void* pPushWorldInventoryDetour;
         void* pPushNPCInventoryDetour;
         void* pPushHeroInventoryDetour;
@@ -18,7 +19,8 @@ private:
 public:
     static const GameOffsets* instance();
 
-    void* getPushItem() const;
+    void* getPushItem0() const;
+    void* getPushItem1() const;
     void* getPushWorldInventoryDetour() const;
     void* getPushNPCInventoryDetour() const;
     void* getPushHeroInventoryDetour() const;
