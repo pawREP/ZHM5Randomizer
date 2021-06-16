@@ -21,17 +21,18 @@ GameOffsets::GameOffsets() {
     switch(getVersion()) {
     case GameVersion::H3DX12: {
 
-        // TODO: Reintroduce signature scanning here. It was previously removed because of major signature changed introduced with Hitman update 3.30.
-        // (Inlining, NPC/WorldItem spawn merge). If the new layout turns out to be stable, sig scanning should be reintroduced.
+        // TODO: Reintroduce signature scanning here. It was previously removed because of major
+        // signature changed introduced with Hitman update 3.30. (Inlining, NPC/WorldItem spawn
+        // merge). If the new layout turns out to be stable, sig scanning should be reintroduced.
 
         // Hitman 3 3.30 offsets
-        offsets.pPushItem0 = reinterpret_cast<void*>(0x140D6DBA0);
-        offsets.pPushItem1 = reinterpret_cast<void*>(0x140D6E190);
-        offsets.pPushNPCInventoryDetour = reinterpret_cast<void*>(0x14015FD81);
-        offsets.pPushWorldInventoryDetour = reinterpret_cast<void*>(0x140D681CA);
-        offsets.pPushHeroInventoryDetour = reinterpret_cast<void*>(0x14064B253);
-        offsets.pPushStashInventoryDetour = reinterpret_cast<void*>(0x1403D7174);
-        offsets.pZEntitySceneContext_LoadScene = reinterpret_cast<void**>(0x141D05B38);
+        offsets.pPushItem0 = reinterpret_cast<void*>(0x140D75060);
+        offsets.pPushItem1 = reinterpret_cast<void*>(0x140D75650);
+        offsets.pPushNPCInventoryDetour = reinterpret_cast<void*>(0x14015FF01);
+        offsets.pPushWorldInventoryDetour = reinterpret_cast<void*>(0x140D6F68A);
+        offsets.pPushHeroInventoryDetour = reinterpret_cast<void*>(0x14064C923);
+        offsets.pPushStashInventoryDetour = reinterpret_cast<void*>(0x1403D8074);
+        offsets.pZEntitySceneContext_LoadScene = reinterpret_cast<void**>(0x141D11D88);
     } break;
     case GameVersion::H2DX12:
     case GameVersion::H2DX11:
