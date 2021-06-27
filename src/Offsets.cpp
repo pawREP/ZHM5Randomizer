@@ -1,4 +1,5 @@
 #include "Offsets.h"
+#include "Pe.h"
 #include "SigScanner.h"
 #include "Signatures.h"
 #include <Windows.h>
@@ -38,7 +39,12 @@ GameOffsets::GameOffsets() {
     case GameVersion::H2DX11:
         // TODO: H2 Specific error message
     default:
-        MessageBoxA(NULL, "Randomizer doesn't support current game version", "", NULL);
+        MessageBoxA(NULL,
+                    std::format("Incompatible client version detected. Please update to the latest "
+                                "client release.\n\nPE timestamp: {:X}",
+                                PE::getTimestamp())
+                    .c_str(),
+                    "Incompatible Client Version", NULL);
         ExitProcess(0);
     }
 }
