@@ -10,3 +10,6 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "DINPUT8")
+
+target_link_libraries(${PROJECT_NAME} Wintrust)
+target_link_libraries(${PROJECT_NAME} Crypt32)
