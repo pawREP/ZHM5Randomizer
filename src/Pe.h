@@ -18,7 +18,7 @@ enum class CertNameTypes : int {
 
 class SubjectCertificate {
 public:
-    SubjectCertificate(const wchar_t* path);
+    explicit SubjectCertificate(const wchar_t* path);
     ~SubjectCertificate();
 
     std::optional<std::string> getString(CertNameTypes type, int flag) const;

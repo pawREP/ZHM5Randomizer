@@ -15,7 +15,11 @@ using namespace PE;
 
 class SubjectCertificate::PeSubjectCertImpl {
 public:
-    PeSubjectCertImpl(const wchar_t* path);
+    explicit PeSubjectCertImpl(const wchar_t* path);
+    PeSubjectCertImpl(const PeSubjectCertImpl&) = delete;
+    PeSubjectCertImpl(PeSubjectCertImpl&&) noexcept = delete;
+    PeSubjectCertImpl& operator=(const PeSubjectCertImpl&) = delete;
+    PeSubjectCertImpl& operator=(PeSubjectCertImpl&&) noexcept = delete;
     ~PeSubjectCertImpl();
 
     std::optional<std::string> getString(CertNameTypes type, int flag);
