@@ -26,14 +26,14 @@ GameOffsets::GameOffsets() {
         // signature changed introduced with Hitman update 3.30. (Inlining, NPC/WorldItem spawn
         // merge). If the new layout turns out to be stable, sig scanning should be reintroduced.
 
-        // Hitman 3 3.30 offsets
+        // Hitman 3 3.40.1 offsets
         offsets.pPushItem0 = reinterpret_cast<void*>(0x140D75060);
         offsets.pPushItem1 = reinterpret_cast<void*>(0x140D75650);
         offsets.pPushNPCInventoryDetour = reinterpret_cast<void*>(0x14015FF01);
         offsets.pPushWorldInventoryDetour = reinterpret_cast<void*>(0x140D6F68A);
         offsets.pPushHeroInventoryDetour = reinterpret_cast<void*>(0x14064C923);
         offsets.pPushStashInventoryDetour = reinterpret_cast<void*>(0x1403D8074);
-        offsets.pZEntitySceneContext_LoadScene = reinterpret_cast<void**>(0x141D11D88);
+        offsets.pZEntitySceneContext_LoadScene = reinterpret_cast<void**>(0x141D11D20);
     } break;
     case GameVersion::H2DX12:
     case GameVersion::H2DX11:
