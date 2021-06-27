@@ -1,12 +1,9 @@
 #include "Version.h"
-#include <filesystem>
-#include <windows.h>
+#include "Pe.h"
+#include <Windows.h>
 
 GameVersion getVersion() {
-    void* image_base = GetModuleHandle(NULL);
-    auto dos_header = reinterpret_cast<IMAGE_DOS_HEADER*>(image_base);
-    auto nt_header = reinterpret_cast<IMAGE_NT_HEADERS*>((uintptr_t)image_base + dos_header->e_lfanew);
-    int timestamp = nt_header->FileHeader.TimeDateStamp;
+    auto timestamp = PE::getTimestamp();
     if(timestamp == 0x60D1D7D0)
         return GameVersion::H3DX12;
     return GameVersion::UNK;
