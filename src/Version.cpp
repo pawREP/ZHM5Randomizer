@@ -4,7 +4,7 @@
 
 GameVersion getVersion() {
     auto timestamp = PE::getTimestamp();
-    if(timestamp == 0x60D1D7D0)
+    if(timestamp == 0x6157119F)
         return GameVersion::H3DX12;
     return GameVersion::UNK;
 }
